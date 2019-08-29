@@ -144,6 +144,7 @@ public class BrowserActivity extends Activity {
 	private void init() {
 
 		mWebView = new X5WebView(this, null);
+		// webview时需要自动播放h5里的video视频
 		mWebView.getSettings().setMediaPlaybackRequiresUserGesture(false);
 
 		mViewParent.addView(mWebView, new FrameLayout.LayoutParams(
