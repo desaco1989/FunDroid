@@ -58,7 +58,8 @@ public class BrowserActivity extends Activity {
 	private EditText mUrl;
 
 //	private static final String mHomeUrl = "http://app.html5.qq.com/navi/index";
-	private static final String mHomeUrl = "http://clarins.myprd.cn/";
+//	private static final String mHomeUrl = "http://clarins.myprd.cn/";
+	private static final String mHomeUrl = "file:///android_asset/ad/fun_html/ad_bg_video.html";
 	private static final String TAG = "SdkDemo";
 	private static final int MAX_LENGTH = 14;
 	private boolean mNeedTestPage = false;
@@ -143,6 +144,7 @@ public class BrowserActivity extends Activity {
 	private void init() {
 
 		mWebView = new X5WebView(this, null);
+		mWebView.getSettings().setMediaPlaybackRequiresUserGesture(false);
 
 		mViewParent.addView(mWebView, new FrameLayout.LayoutParams(
 				FrameLayout.LayoutParams.FILL_PARENT,

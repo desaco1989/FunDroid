@@ -78,6 +78,8 @@ public class MainActivity extends Activity {
 			throw new IllegalArgumentException("the gridView is null");
 
 		titles = getResources().getStringArray(R.array.index_titles);
+		//
+
 		int[] iconResourse = { R.drawable.tbsweb, R.drawable.fullscreen,
 				R.drawable.filechooser };
 
