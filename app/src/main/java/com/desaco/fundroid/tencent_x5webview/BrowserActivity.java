@@ -46,6 +46,7 @@ import com.tencent.smtt.utils.TbsLog;
 public class BrowserActivity extends Activity {
 	/**
 	 * 作为一个浏览器的示例展示出来，采用android+web的模式
+	 *
 	 */
 	private X5WebView mWebView;
 	private ViewGroup mViewParent;
@@ -58,8 +59,8 @@ public class BrowserActivity extends Activity {
 	private EditText mUrl;
 
 //	private static final String mHomeUrl = "http://app.html5.qq.com/navi/index";
-//	private static final String mHomeUrl = "http://clarins.myprd.cn/";
 	private static final String mHomeUrl = "file:///android_asset/ad/fun_html/ad_bg_video.html";
+//	private static final String mHomeUrl = "file:///android_asset/index.html";
 	private static final String TAG = "SdkDemo";
 	private static final int MAX_LENGTH = 14;
 	private boolean mNeedTestPage = false;

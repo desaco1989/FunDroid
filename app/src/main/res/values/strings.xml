@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">X5功能演示</string>
+    <string name="app_name">FunDroid</string>
     <string name="action_settings">设置</string>
     <string name="title_activity_mini_qb">MiniQBActivity</string>
     <string name="hello_world">Hello world!</string>
