@@ -59,8 +59,10 @@ public class BrowserActivity extends Activity {
 	private EditText mUrl;
 
 //	private static final String mHomeUrl = "http://app.html5.qq.com/navi/index";
-	private static final String mHomeUrl = "file:///android_asset/ad/fun_html/ad_bg_video.html";
-//	private static final String mHomeUrl = "file:///android_asset/index.html";
+//	private static final String mHomeUrl = "file:///android_asset/ad/fun_html/ad_bg_video.html";
+	private static final String mHomeUrl = "file:///android_asset/index.html";
+//	private static final String mHomeUrl = "http://clarins.myprd.cn/";
+
 	private static final String TAG = "SdkDemo";
 	private static final int MAX_LENGTH = 14;
 	private boolean mNeedTestPage = false;
@@ -291,6 +293,11 @@ public class BrowserActivity extends Activity {
 				.getPath());
 		// webSetting.setPageCacheCapacity(IX5WebSettings.DEFAULT_CACHE_CAPACITY);
 		webSetting.setPluginState(WebSettings.PluginState.ON_DEMAND);
+
+		// 适配网页上的网页宽度和高度 ，如果是网页链接 TODO
+//		webSetting.setUserAgent("pc");
+//		webSetting.setUserAgentString("pc");
+
 		// webSetting.setRenderPriority(WebSettings.RenderPriority.HIGH);
 		// webSetting.setPreFectch(true);
 		long time = System.currentTimeMillis();
