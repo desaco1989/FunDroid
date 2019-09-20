@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.test_webview_demo"
+    package="com.desaco.fundroid"
     android:versionCode="1"
-    android:versionName="1.0" >
+    android:versionName="1.0">
 
     <uses-sdk
         android:minSdkVersion="11"
@@ -23,31 +23,43 @@
     <!-- 硬件加速对X5视频播放非常重要，建议开启 -->
     <uses-permission android:name="android.permission.GET_TASKS" />
 
+    <!--android:hardwareAccelerated="true"-->
     <application
         android:name="com.desaco.fundroid.APPAplication"
         android:allowBackup="true"
         android:hardwareAccelerated="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/AppTheme">
 
 
         <activity
             android:name="com.desaco.fundroid.tencent_x5webview.FullScreenActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
-            android:label="@string/app_name" >
-        </activity>
+            android:label="@string/app_name"></activity>
 
         <activity
             android:name="com.desaco.fundroid.tencent_x5webview.FilechooserActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
-            android:label="@string/app_name" >
-        </activity>
+            android:label="@string/app_name"></activity>
 
         <activity
             android:name="com.desaco.fundroid.tencent_x5webview.BrowserActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
-            android:label="@string/app_name" >
+            android:exported="true"
+            android:label="@string/app_name">
+
+        </activity>
+
+        <activity
+            android:name="com.desaco.fundroid.MainActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:exported="true">
+
+        </activity>
+
+        <!-- android:hardwareAccelerated="true" -->
+        <activity android:name="com.desaco.fundroid.video.TextureviewActivty">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -55,15 +67,9 @@
             </intent-filter>
         </activity>
 
-        <activity
-            android:name="com.desaco.fundroid.MainActivity"
-            android:configChanges="orientation|screenSize|keyboardHidden" >
+        <activity android:name="com.desaco.fundroid.glsurface_mplayer.GLShaderMainActivity">
 
         </activity>
-        <activity android:name="com.desaco.fundroid.video.TextureviewActivty">
-
-        </activity>
-
     </application>
 
 </manifest>

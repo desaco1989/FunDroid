@@ -2,12 +2,16 @@ package com.desaco.fundroid;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.ResolveInfo;
 import android.os.Bundle;
 import android.os.Process;
 import android.view.KeyEvent;
@@ -15,159 +19,221 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.Button;
 import android.widget.GridView;
 import android.widget.SimpleAdapter;
 
 import com.desaco.fundroid.tencent_x5webview.BrowserActivity;
 import com.desaco.fundroid.tencent_x5webview.FilechooserActivity;
 import com.desaco.fundroid.tencent_x5webview.FullScreenActivity;
-import com.example.test_webview_demo.R;
 
 public class MainActivity extends Activity {
 
-	public static boolean firstOpening = true;
-	private static String[] titles = null;
+    public static boolean firstOpening = true;
+    private static String[] titles = null;
 
-	public static final int MSG_WEBVIEW_CONSTRUCTOR = 1;
-	public static final int MSG_WEBVIEW_POLLING = 2;
+    public static final int MSG_WEBVIEW_CONSTRUCTOR = 1;
+    public static final int MSG_WEBVIEW_POLLING = 2;
 
-	// /////////////////////////////////////////////////////////////////////////////////////////////////
-	// add constant here
-	private static final int TBS_WEB = 0;
-	private static final int FULL_SCREEN_VIDEO = 1;
-	private static final int FILE_CHOOSER = 2;
+    // /////////////////////////////////////////////////////////////////////////////////////////////////
+    // add constant here
+    private static final int TBS_WEB = 0;
+    private static final int FULL_SCREEN_VIDEO = 1;
+    private static final int FILE_CHOOSER = 2;
 
-	// /////////////////////////////////////////////////////////////////////////////////////////////
-	// for view init
-	private Context mContext = null;
-	private SimpleAdapter gridAdapter;
-	private GridView gridView;
-	private ArrayList<HashMap<String, Object>> items;
+    // /////////////////////////////////////////////////////////////////////////////////////////////
+    // for view init
+    private Context mContext = null;
+    private SimpleAdapter gridAdapter;
+    private GridView gridView;
+    private ArrayList<HashMap<String, Object>> items;
 
-	private static boolean main_initialized = false;
+    private static boolean main_initialized = false;
 
-	// ////////////////////////////////////////////////////////////////////////////////////////////////
-	// Activity OnCreate
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_main_advanced);
-		mContext = this;
-		if (!main_initialized) {
-			this.new_init();
-		}
-	}
+    // ////////////////////////////////////////////////////////////////////////////////////////////////
+    // Activity OnCreate
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main_advanced);
+        mContext = this;
+        // jmp_brower
+        Button jmpBt = (Button) findViewById(R.id.jmp_brower);
+        jmpBt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                jumpBrower();
+            }
+        });
+        if (!main_initialized) {
+            this.new_init();
+        }
+    }
 
-	// ////////////////////////////////////////////////////////////////////////////////////////////////
-	// Activity OnResume
-	@Override
-	protected void onResume() {
-		this.new_init();
+    private void jumpBrower() {
+        Intent intent = new Intent(MainActivity.this,
+                BrowserActivity.class);
+        MainActivity.this.startActivity(intent);
+    }
 
-		// this.gridView.setAdapter(gridAdapter);
-		super.onResume();
-	}
+    /**
+     * android 启动其他应用两种方法
+     *
+     * @param context
+     */
+    private void openOtherApp1(Context context) {
+        try {
+            ComponentName apk2Component1 = new ComponentName("com.desaco.fundroid",
+                    "com.desaco.fundroid.tencent_x5webview.BrowserActivity");
+            Intent mIntent = new Intent();
+            mIntent.addCategory(Intent.CATEGORY_LAUNCHER);
+            mIntent.setComponent(apk2Component1);
+            context.startActivity(mIntent);
+        } catch (Exception ex) {
 
-	// ////////////////////////////////////////////////////////////////////////////////
-	// initiate new UI content
-	private void new_init() {
-		items = new ArrayList<HashMap<String, Object>>();
-		this.gridView = (GridView) this.findViewById(R.id.item_grid);
+        }
 
-		if (gridView == null)
-			throw new IllegalArgumentException("the gridView is null");
+    }
 
-		titles = getResources().getStringArray(R.array.index_titles);
-		//
+    private void openOtherApp() {
+        String packageName = "com.inpor.xxx";
+        PackageInfo pi = null;
+        try {
+            pi = getPackageManager().getPackageInfo(packageName, 0);
+            Intent resolveIntent = new Intent(Intent.ACTION_MAIN, null);
+            resolveIntent.addCategory(Intent.CATEGORY_LAUNCHER);
+            resolveIntent.setPackage(pi.packageName);
 
-		int[] iconResourse = { R.drawable.tbsweb, R.drawable.fullscreen,
-				R.drawable.filechooser };
+            List<ResolveInfo> apps = getPackageManager().queryIntentActivities(resolveIntent, 0);
 
-		HashMap<String, Object> item = null;
-		// HashMap<String, ImageView> block = null;
-		for (int i = 0; i < titles.length; i++) {
-			item = new HashMap<String, Object>();
-			item.put("title", titles[i]);
-			item.put("icon", iconResourse[i]);
+            ResolveInfo ri = apps.iterator().next();
+            if (ri != null) {
+                packageName = ri.activityInfo.packageName;
+                String className = ri.activityInfo.name;
 
-			items.add(item);
-		}
-		this.gridAdapter = new SimpleAdapter(this, items,
-				R.layout.function_block, new String[] { "title", "icon" },
-				new int[] { R.id.Item_text, R.id.Item_bt });
-		if (null != this.gridView) {
-			this.gridView.setAdapter(gridAdapter);
-			this.gridAdapter.notifyDataSetChanged();
-			this.gridView.setOnItemClickListener(new OnItemClickListener() {
+                Intent intent = new Intent(Intent.ACTION_MAIN);
+                intent.addCategory(Intent.CATEGORY_LAUNCHER);
 
-				@Override
-				public void onItemClick(AdapterView<?> gridView, View view,
-						int position, long id) {
-					Intent intent = null;
-					switch (position) {
-					case FILE_CHOOSER: {
-						intent = new Intent(MainActivity.this,
-								FilechooserActivity.class);
-						MainActivity.this.startActivity(intent);
+                ComponentName cn = new ComponentName(packageName, className);
 
-					}
-						break;
-					case FULL_SCREEN_VIDEO: {
-						intent = new Intent(MainActivity.this,
-								FullScreenActivity.class);
-						MainActivity.this.startActivity(intent);
-					}
-						break;
+                intent.setComponent(cn);
+                startActivity(intent);
+            }
+        } catch (Exception e) {
+        }
+    }
 
-					case TBS_WEB: {
-						intent = new Intent(MainActivity.this,
-								BrowserActivity.class);
-						MainActivity.this.startActivity(intent);
 
-					}
-						break;
+    // ////////////////////////////////////////////////////////////////////////////////////////////////
+    // Activity OnResume
+    @Override
+    protected void onResume() {
+        this.new_init();
 
-					}
+        // this.gridView.setAdapter(gridAdapter);
+        super.onResume();
+    }
 
-				}
-			});
+    // ////////////////////////////////////////////////////////////////////////////////
+    // initiate new UI content
+    private void new_init() {
+        items = new ArrayList<HashMap<String, Object>>();
+        this.gridView = (GridView) this.findViewById(R.id.item_grid);
 
-		}
-		main_initialized = true;
+        if (gridView == null)
+            throw new IllegalArgumentException("the gridView is null");
 
-	}
+        titles = getResources().getStringArray(R.array.index_titles);
+        //
 
-	// ///////////////////////////////////////////////////////////////////////////////////////////
-	// Activity menu
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		return true;
-	}
+        int[] iconResourse = {R.drawable.tbsweb, R.drawable.fullscreen,
+                R.drawable.filechooser};
 
-	@Override
-	public boolean onKeyDown(int keyCode, KeyEvent event) {
-		// TODO Auto-generated method stub
-		switch (keyCode) {
-		case KeyEvent.KEYCODE_BACK:
-			this.tbsSuiteExit();
-		}
-		return super.onKeyDown(keyCode, event);
-	}
+        HashMap<String, Object> item = null;
+        // HashMap<String, ImageView> block = null;
+        for (int i = 0; i < titles.length; i++) {
+            item = new HashMap<String, Object>();
+            item.put("title", titles[i]);
+            item.put("icon", iconResourse[i]);
 
-	private void tbsSuiteExit() {
-		// exit TbsSuite?
-		AlertDialog.Builder dialog = new AlertDialog.Builder(mContext);
-		dialog.setTitle("X5功能演示");
-		dialog.setPositiveButton("OK", new AlertDialog.OnClickListener() {
+            items.add(item);
+        }
+        this.gridAdapter = new SimpleAdapter(this, items,
+                R.layout.function_block, new String[]{"title", "icon"},
+                new int[]{R.id.Item_text, R.id.Item_bt});
+        if (null != this.gridView) {
+            this.gridView.setAdapter(gridAdapter);
+            this.gridAdapter.notifyDataSetChanged();
+            this.gridView.setOnItemClickListener(new OnItemClickListener() {
 
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				// TODO Auto-generated method stub
-				Process.killProcess(Process.myPid());
-			}
-		});
-		dialog.setMessage("quit now?");
-		dialog.create().show();
-	}
+                @Override
+                public void onItemClick(AdapterView<?> gridView, View view,
+                                        int position, long id) {
+                    Intent intent = null;
+                    switch (position) {
+                        case FILE_CHOOSER: {
+                            intent = new Intent(MainActivity.this,
+                                    FilechooserActivity.class);
+                            MainActivity.this.startActivity(intent);
+
+                        }
+                        break;
+                        case FULL_SCREEN_VIDEO: {
+                            intent = new Intent(MainActivity.this,
+                                    FullScreenActivity.class);
+                            MainActivity.this.startActivity(intent);
+                        }
+                        break;
+
+                        case TBS_WEB: {
+                            intent = new Intent(MainActivity.this,
+                                    BrowserActivity.class);
+                            MainActivity.this.startActivity(intent);
+
+                        }
+                        break;
+
+                    }
+
+                }
+            });
+
+        }
+        main_initialized = true;
+
+    }
+
+    // ///////////////////////////////////////////////////////////////////////////////////////////
+    // Activity menu
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        return true;
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        // TODO Auto-generated method stub
+        switch (keyCode) {
+            case KeyEvent.KEYCODE_BACK:
+                this.tbsSuiteExit();
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+
+    private void tbsSuiteExit() {
+        // exit TbsSuite?
+        AlertDialog.Builder dialog = new AlertDialog.Builder(mContext);
+        dialog.setTitle("X5功能演示");
+        dialog.setPositiveButton("OK", new AlertDialog.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // TODO Auto-generated method stub
+                Process.killProcess(Process.myPid());
+            }
+        });
+        dialog.setMessage("quit now?");
+        dialog.create().show();
+    }
 }

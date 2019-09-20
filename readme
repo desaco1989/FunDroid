@@ -2,4 +2,6 @@
 
 2.asserts下加入本地H5-网页背景和视频播放
 
-3.TextureView+MediaPlayer播放视频
+3.TextureView + MediaPlayer播放视频
+
+4.GLSurfaceView + MediaPlayer播放视频

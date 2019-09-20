@@ -8,9 +8,9 @@ import android.view.View;
 import android.webkit.JavascriptInterface;
 import android.widget.Toast;
 
+import com.desaco.fundroid.R;
 import com.desaco.fundroid.tencent_x5webview.utils.WebViewJavaScriptFunction;
 import com.desaco.fundroid.tencent_x5webview.utils.X5WebView;
-import com.example.test_webview_demo.R;
 
 
 public class FullScreenActivity extends Activity {

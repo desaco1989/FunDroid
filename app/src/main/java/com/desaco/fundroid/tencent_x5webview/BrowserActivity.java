@@ -29,8 +29,8 @@ import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.desaco.fundroid.R;
 import com.desaco.fundroid.tencent_x5webview.utils.X5WebView;
-import com.example.test_webview_demo.R;
 import com.tencent.smtt.export.external.interfaces.IX5WebChromeClient.CustomViewCallback;
 import com.tencent.smtt.export.external.interfaces.JsResult;
 import com.tencent.smtt.sdk.CookieSyncManager;
@@ -46,7 +46,7 @@ import com.tencent.smtt.utils.TbsLog;
 public class BrowserActivity extends Activity {
 	/**
 	 * 作为一个浏览器的示例展示出来，采用android+web的模式
-	 *
+	 * com.desaco.fundroid.tencent_x5webview.BrowserActivity
 	 */
 	private X5WebView mWebView;
 	private ViewGroup mViewParent;

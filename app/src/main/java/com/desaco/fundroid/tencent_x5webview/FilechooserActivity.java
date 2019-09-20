@@ -6,8 +6,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.desaco.fundroid.R;
 import com.desaco.fundroid.tencent_x5webview.utils.X5WebView;
-import com.example.test_webview_demo.R;
 import com.tencent.smtt.sdk.ValueCallback;
 import com.tencent.smtt.sdk.WebChromeClient;
 

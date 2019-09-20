@@ -9,10 +9,14 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.Surface;
 import android.view.TextureView;
+import android.view.View;
+import android.view.WindowManager;
+import android.widget.ProgressBar;
 
 import androidx.annotation.Nullable;
 
-import com.example.test_webview_demo.R;
+
+import com.desaco.fundroid.R;
 
 import java.io.IOException;
 
@@ -21,15 +25,26 @@ import java.io.IOException;
  */
 public class TextureviewActivty extends Activity {
 
-    private String mVideoUrl = "http://www.w3school.com.cn/example/html5/mov_bbb.mp4";
+    //    private String mVideoUrl = "http://www.w3school.com.cn/example/html5/mov_bbb.mp4";
+    private String mVideoUrl = "https://test-1258759011.cos.ap-guangzhou.myqcloud.com/前贴片/1566009434356_682_ad201901.mp4";
+    // https://test-1258759011.cos.ap-guangzhou.myqcloud.com/前贴片/1566009434356_682_ad201901.mp4
     private TextureView mTextureView;
+    // pbar ProgressBar
+    private ProgressBar mPBar;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //
+        getWindow().setFlags(
+                WindowManager.LayoutParams.FLAG_HARDWARE_ACCELERATED,
+                WindowManager.LayoutParams.FLAG_HARDWARE_ACCELERATED);
+
         setContentView(R.layout.textureview_activity);
 
-        mTextureView = (TextureView)findViewById(R.id.textureView);
+        mTextureView = (TextureView) findViewById(R.id.textureView);
+        mPBar = (ProgressBar) findViewById(R.id.pbar);
+        mPBar.setVisibility(View.VISIBLE);
 
         initMediaPlayer();
         initTextureView();
@@ -38,10 +53,10 @@ public class TextureviewActivty extends Activity {
     }
 
     private void play() {
-        if (mMediaPlayer == null){
+        if (mMediaPlayer == null) {
             return;
         }
-        if (mMediaPlayer.isPlaying()){
+        if (mMediaPlayer.isPlaying()) {
             return;
         }
         try {
@@ -61,13 +76,14 @@ public class TextureviewActivty extends Activity {
     }
 
     private void initMediaPlayer() {
-        AudioManager mAudioManager = (AudioManager)getSystemService(Context.AUDIO_SERVICE);
+        AudioManager mAudioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
         int mVolumn = mAudioManager.getStreamVolume(AudioManager.STREAM_MUSIC);
         if (mMediaPlayer == null) {
             mMediaPlayer = new MediaPlayer();
             mMediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
                 @Override
                 public void onPrepared(MediaPlayer mp) {
+                    mPBar.setVisibility(View.GONE);
                     mMediaPlayer.start();
                 }
             });
@@ -106,7 +122,7 @@ public class TextureviewActivty extends Activity {
 
         @Override
         public void onSurfaceTextureAvailable(SurfaceTexture surface, int width, int height) {
-            if (mMediaPlayer == null){
+            if (mMediaPlayer == null) {
                 return;
             }
             mMediaPlayer.setSurface(new Surface(surface));
@@ -119,7 +135,7 @@ public class TextureviewActivty extends Activity {
 
         @Override
         public boolean onSurfaceTextureDestroyed(SurfaceTexture surface) {
-            if (mMediaPlayer != null){
+            if (mMediaPlayer != null) {
                 mMediaPlayer.release();
                 mMediaPlayer = null;
             }
