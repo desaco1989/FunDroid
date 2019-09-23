@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!--400dp-->
+    <SurfaceView
+        android:id="@+id/video_surface"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <RelativeLayout
+        android:id="@+id/bottom_box_layout"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginBottom="10dp">
+
+        <Button
+            android:id="@+id/play_pause_bt"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerInParent="true"
+            android:background="@mipmap/ad_middle_img" />
+
+        <TextView
+            android:id="@+id/total_video_time_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerInParent="true"
+            android:text=" / 00:00"
+            android:textColor="#ffffff" />
+
+        <TextView
+            android:id="@+id/current_video_time_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_centerInParent="true"
+            android:layout_marginRight="2dp"
+            android:layout_toLeftOf="@+id/total_video_time_tv"
+            android:text="00:00"
+            android:textColor="#ffffff" />
+
+        <SeekBar
+            android:id="@+id/video_seekbar"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_toLeftOf="@+id/current_video_time_tv"
+            android:layout_toRightOf="@+id/play_pause_bt"
+            android:maxHeight="1.5dip"
+            android:minHeight="1.5dip"
+            android:progressDrawable="@drawable/bg_bar"
+            android:thumb="@mipmap/icon_point" />
+
+    </RelativeLayout>
+
+    <!-- loading转圈 -->
+    <ProgressBar
+        android:id="@+id/app_video_loading"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_centerInParent="true"
+        android:indeterminate="false"
+        android:indeterminateBehavior="repeat"
+        android:indeterminateDrawable="@drawable/circle_progress"
+        android:indeterminateOnly="true"
+        android:visibility="gone" />
+
+    <ImageView
+        android:id="@+id/place_img"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@mipmap/ad_middle_img"
+        android:visibility="gone" />
+
+</RelativeLayout>

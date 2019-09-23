@@ -5,10 +5,10 @@
     android:layout_height="match_parent"
     android:background="@drawable/launcher_background">
 
-    <TextureView
-        android:id="@+id/textureView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+    <!--<TextureView-->
+        <!--android:id="@+id/textureView"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent" />-->
 
     <ProgressBar
         android:layout_centerInParent="true"
