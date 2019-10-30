@@ -12,4 +12,7 @@
         <item>文件选择器</item>
     </string-array>
 
+    <string name="test_connection">Test Connection</string>
+    <string name="connection_class">Your connection class is:</string>
+
 </resources>

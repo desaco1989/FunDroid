@@ -71,6 +71,14 @@
         <activity android:name="com.desaco.fundroid.textureview_mplayer.IjkTextureview2Activty">
         </activity>
         <activity android:name="com.desaco.fundroid.surfaceview_mplayer.HardPlayerActivty">
+
+        </activity>
+
+        <activity android:name="com.desaco.fundroid.net_check_speed.NetSpeedAndCheckActivty">
+
+        </activity>
+
+        <activity android:name="com.desaco.fundroid.qr_generate_scan.BarCodeTestActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

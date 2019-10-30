@@ -237,6 +237,24 @@ public class HardPlayerActivty extends Activity {
     };
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        if (mMediaPlayer == null) {
+            initData();
+        }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if (mMediaPlayer != null) {
+            mMediaPlayer.stop();
+            mMediaPlayer.release();
+            mMediaPlayer = null;
+        }
+    }
+
+    @Override
     protected void onDestroy() {
         super.onDestroy();
         if (mMediaPlayer != null) {
