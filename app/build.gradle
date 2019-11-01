@@ -42,4 +42,15 @@ dependencies {
     implementation(name:'support-permission-v2.0.0', ext:'aar')
     implementation files('libs/tbs_sdk_thirdapp_v3.6.0.1310_43612_sharewithdownload_withoutGame_obfs_20180706_163319.jar')
     implementation files('libs/zxing.jar')
+    // jxl
+    implementation files('libs/jxl.jar')
+    // poi
+//    implementation files('libs/poi-3.9.jar')
+//    implementation files('libs/poi-ooxml-3.8.jar')
+//    implementation files('libs/poi-scratchpad-3.9.jar')
+
+    // poi Android
+    implementation files('libs/commons-collections4-4.2.jar')
+    implementation files('libs/poi-4.0.0.jar')
+    implementation files('libs/poi-scratchpad-4.0.0.jar')
 }
