@@ -39,10 +39,10 @@ public class PoiWordMainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 try {
-                    // books
                     InputStream templetDocStream = getAssets().open("请假单模板2.doc");
-                    String targetDocPath = mContext.getExternalFilesDir("poi").getPath() + File.separator + "请假单2.doc";//这个目录，不需要申请存储权限
+//                    String targetDocPath = mContext.getExternalFilesDir("poi").getPath() + File.separator + "请假单2.doc";//这个目录，不需要申请存储权限
 
+                    String targetDocPath = null;
                     //获得SD卡根目录路径
                     File sdDir = Environment.getExternalStorageDirectory();
                     String sdpath = sdDir.getAbsolutePath();
