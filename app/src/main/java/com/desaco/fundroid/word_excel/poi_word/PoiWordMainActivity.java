@@ -50,7 +50,6 @@ public class PoiWordMainActivity extends AppCompatActivity {
                     String filepath = sdpath + File.separator + "books/请假单2.doc";
                     File desFile = new File(filepath);
                     if (!desFile.exists()) {
-//                        desFile.mkdir();
                         desFile.createNewFile();
                     }
                     targetDocPath = filepath.toString();

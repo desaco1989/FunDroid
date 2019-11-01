@@ -1,11 +1,20 @@
 package com.desaco.fundroid;
 
 import android.app.Application;
+import android.content.Context;
 import android.util.Log;
+
+import androidx.multidex.MultiDex;
 
 import com.tencent.smtt.sdk.QbSdk;
 
 public class APPAplication extends Application {
+
+	@Override
+	protected void attachBaseContext(Context base) {
+		super.attachBaseContext(base);
+		MultiDex.install(this);
+	}
 
 	@Override
 	public void onCreate() {
