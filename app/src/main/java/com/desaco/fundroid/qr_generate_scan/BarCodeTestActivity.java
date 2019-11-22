@@ -54,7 +54,7 @@ public class BarCodeTestActivity extends Activity {
 					String contentString = qrStrEditText.getText().toString();
 					if (!contentString.equals("")) {
 						//根据字符串生成二维码图片并显示在界面上，第二个参数为图片的大小（350*350）
-						Bitmap qrCodeBitmap = EncodingHandler.createQRCode(contentString, 350);
+						Bitmap qrCodeBitmap = EncodingHandler.createQRCode(contentString, 2000);
 						qrImgImageView.setImageBitmap(qrCodeBitmap);
 					}else {
 						Toast.makeText(BarCodeTestActivity.this, "Text can not be empty", Toast.LENGTH_SHORT).show();

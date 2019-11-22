@@ -82,18 +82,18 @@
         </activity>
 
         <activity android:name="com.desaco.fundroid.qr_generate_scan.BarCodeTestActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity android:name=".word_excel.jxl_excel.ui.ExcelJxlActivity">
 
         </activity>
 
         <activity android:name=".word_excel.poi_word.PoiWordMainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
 
     </application>
