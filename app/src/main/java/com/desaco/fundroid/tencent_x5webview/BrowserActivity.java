@@ -60,8 +60,8 @@ public class BrowserActivity extends Activity {
 
 //	private static final String mHomeUrl = "http://app.html5.qq.com/navi/index";
 //	private static final String mHomeUrl = "file:///android_asset/ad/fun_html/ad_bg_video.html";
-	private static final String mHomeUrl = "file:///android_asset/index.html";
-//	private static final String mHomeUrl = "http://clarins.myprd.cn/";
+//	private static final String mHomeUrl = "file:///android_asset/index.html";
+	private static final String mHomeUrl = "http://clarins.myprd.cn/";
 
 	private static final String TAG = "SdkDemo";
 	private static final int MAX_LENGTH = 14;

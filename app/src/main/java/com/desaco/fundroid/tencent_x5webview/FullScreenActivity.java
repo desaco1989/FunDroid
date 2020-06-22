@@ -26,8 +26,11 @@ public class FullScreenActivity extends Activity {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.filechooser_layout);
+
 		webView = (X5WebView) findViewById(R.id.web_filechooser);
-		webView.loadUrl("file:///android_asset/webpage/fullscreenVideo.html");
+		// http://clarins.myprd.cn/
+		// file:///android_asset/webpage/fullscreenVideo.html
+		webView.loadUrl("http://clarins.myprd.cn/");
 
 		getWindow().setFormat(PixelFormat.TRANSLUCENT);
 
